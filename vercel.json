@@ -4,7 +4,7 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "vite",
-  "outputDirectory": "dist",
+  "outputDirectory": "dist/public",
   "env": {
     "NODE_ENV": "production"
   },
@@ -12,6 +12,10 @@
     {
       "src": "/api/(.*)",
       "dest": "server/_core/index.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/client/assets/$1"
     },
     {
       "src": "/(.*)",
@@ -25,22 +29,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=3600"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
         }
       ]
     }
