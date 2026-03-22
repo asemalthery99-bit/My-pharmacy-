@@ -1,39 +1,16 @@
 {
-    "version": 2,
-    "name": "ibpharmacy-pro",
-    "buildCommand": "npm run build",
-    "installCommand": "npm install --legacy-peer-deps",
-    "framework": "vite",
-    "outputDirectory": "dist/public",
-    "env": {
-          "NODE_ENV": "production"
-    },
-    "routes": [
-          {
-                  "src": "/api/(.*)",
-                  "dest": "server/_core/index.ts"
-          },
-          {
-                  "src": "/assets/(.*)",
-                  "dest": "/client/assets/$1"
-          },
-          {
-                  "src": "/(.*)",
-                  "dest": "/client/index.html"
-          }
-    ],
-    "headers": [
-          {
-                  "source": "/(.*)",
-                  "headers": [
-                            {
-                                        "key": "Cache-Control",
-                                        "value": "public, max-age=3600, s-maxage=3600"
-                            }
-                  ]
-          }
-    ],
-    "regions": ["iad1"],
-    "public": true
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "framework": "vite",
+  "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "regions": ["sfo1"],
+  "functions": {
+    "server/_core/index.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
-
