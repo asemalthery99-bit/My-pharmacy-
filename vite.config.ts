@@ -1,4 +1,3 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
@@ -30,21 +29,20 @@ function trimLogFile(logPath: string, maxSize: number) {
       return;
     }
 
-    const lines = fs.readFileSync(logPath, "utf-8").split("");
+    const lines = fs.readFileSync(logPath, "utf-8").split("\n");
     const keptLines: string[] = [];
     let keptBytes = 0;
 
     // Keep newest lines (from end) that fit within 60% of maxSize
     const targetSize = TRIM_TARGET_BYTES;
     for (let i = lines.length - 1; i >= 0; i--) {
-      const lineBytes = Buffer.byteLength(`${lines[i]}
-`, "utf-8");
+      const lineBytes = Buffer.byteLength(`${lines[i]}\n`, "utf-8");
       if (keptBytes + lineBytes > targetSize) break;
       keptLines.unshift(lines[i]);
       keptBytes += lineBytes;
     }
 
-    fs.writeFileSync(logPath, keptLines.join(""), "utf-8");
+    fs.writeFileSync(logPath, keptLines.join("\n"), "utf-8");
   } catch {
     /* ignore trim errors */
   }
@@ -63,8 +61,7 @@ function writeToLogFile(source: LogSource, entries: unknown[]) {
   });
 
   // Append to log file
-  fs.appendFileSync(logPath, `${lines.join("")}
-`, "utf-8");
+  fs.appendFileSync(logPath, `${lines.join("\n")}\n`, "utf-8");
 
   // Trim if exceeds max size
   trimLogFile(logPath, MAX_LOG_SIZE_BYTES);
@@ -152,7 +149,7 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const plugins = [react(), tailwindcss(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
 
 export default defineConfig({
   plugins,
