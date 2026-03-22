@@ -1,59 +1,47 @@
 {
-    "version": 2,
-    "name": "ibpharmacy-pro",
-    "buildCommand": "pnpm run build",
-    "installCommand": "pnpm install",
-    "framework": "vite",
-    "env": {
-          "NODE_ENV": "production",
-          "DATABASE_URL": "@database_url",
-          "PAYPAL_CLIENT_ID": "@paypal_client_id",
-          "PAYPAL_CLIENT_SECRET": "@paypal_client_secret",
-          "GOOGLE_MAPS_API_KEY": "@google_maps_api_key",
-          "OPENAI_API_KEY": "@openai_api_key",
-          "FIREBASE_API_KEY": "@firebase_api_key",
-          "AWS_ACCESS_KEY_ID": "@aws_access_key_id",
-          "AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key",
-          "JWT_SECRET": "@jwt_secret"
-    },
-    "routes": [
-          {
-                  "src": "/api/(.*)",
-                  "dest": "server/_core/index.ts"
-          },
-          {
-                  "src": "/(.*)",
-                  "dest": "/client/index.html"
-          }
-    ],
-    "headers": [
-          {
-                  "source": "/(.*)",
-                  "headers": [
-                            {
-                                        "key": "Cache-Control",
-                                        "value": "public, max-age=3600, s-maxage=3600"
-                            },
-                            {
-                                        "key": "X-Content-Type-Options",
-                                        "value": "nosniff"
-                            },
-                            {
-                                        "key": "X-Frame-Options",
-                                        "value": "DENY"
-                            },
-                            {
-                                        "key": "X-XSS-Protection",
-                                        "value": "1; mode=block"
-                            },
-                            {
-                                        "key": "Referrer-Policy",
-                                        "value": "strict-origin-when-cross-origin"
-                            }
-                  ]
-          }
-    ],
-    "regions": ["iad1"],
-    "public": true
+      "version": 2,
+      "name": "ibpharmacy-pro",
+      "buildCommand": "pnpm run build",
+      "installCommand": "pnpm install",
+      "framework": "vite",
+      "routes": [
+              {
+                        "src": "/api/(.*)",
+                        "dest": "server/_core/index.ts"
+              },
+              {
+                        "src": "/(.*)",
+                        "dest": "/client/index.html"
+              }
+      ],
+      "headers": [
+              {
+                        "source": "/(.*)",
+                        "headers": [
+                                    {
+                                                  "key": "Cache-Control",
+                                                  "value": "public, max-age=3600, s-maxage=3600"
+                                    },
+                                    {
+                                                  "key": "X-Content-Type-Options",
+                                                  "value": "nosniff"
+                                    },
+                                    {
+                                                  "key": "X-Frame-Options",
+                                                  "value": "DENY"
+                                    },
+                                    {
+                                                  "key": "X-XSS-Protection",
+                                                  "value": "1; mode=block"
+                                    },
+                                    {
+                                                  "key": "Referrer-Policy",
+                                                  "value": "strict-origin-when-cross-origin"
+                                    }
+                        ]
+              }
+      ],
+      "regions": ["iad1"],
+      "public": true
 }
 
