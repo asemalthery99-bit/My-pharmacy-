@@ -1,47 +1,50 @@
 {
-      "version": 2,
-      "name": "ibpharmacy-pro",
-      "buildCommand": "pnpm run build",
-      "installCommand": "pnpm install",
-      "framework": "vite",
-      "routes": [
-              {
-                        "src": "/api/(.*)",
-                        "dest": "server/_core/index.ts"
-              },
-              {
-                        "src": "/(.*)",
-                        "dest": "/client/index.html"
-              }
-      ],
+  "version": 2,
+  "name": "ibpharmacy-pro",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "framework": "vite",
+  "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server/_core/index.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
       "headers": [
-              {
-                        "source": "/(.*)",
-                        "headers": [
-                                    {
-                                                  "key": "Cache-Control",
-                                                  "value": "public, max-age=3600, s-maxage=3600"
-                                    },
-                                    {
-                                                  "key": "X-Content-Type-Options",
-                                                  "value": "nosniff"
-                                    },
-                                    {
-                                                  "key": "X-Frame-Options",
-                                                  "value": "DENY"
-                                    },
-                                    {
-                                                  "key": "X-XSS-Protection",
-                                                  "value": "1; mode=block"
-                                    },
-                                    {
-                                                  "key": "Referrer-Policy",
-                                                  "value": "strict-origin-when-cross-origin"
-                                    }
-                        ]
-              }
-      ],
-      "regions": ["iad1"],
-      "public": true
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "regions": ["iad1"],
+  "public": true
 }
-
